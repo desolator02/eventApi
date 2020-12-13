@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class EventService {
@@ -63,4 +65,24 @@ public class EventService {
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
+    public ResponseEntity<List<Event>> findByRepoIdAndActorId(Long repoId, Long actorId) {
+        List<Event> eventList = gitRepoService.findByRepoId(repoId);
+        if (CollectionUtils.isEmpty(eventList)) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        else {
+            List<Event> finalList = eventList.stream().map(x-> {
+                if(x.getActor().getId() == actorId){
+                    return x;
+                }
+                return null;
+            }).filter(Objects::nonNull).collect(Collectors.toList());
+            if(CollectionUtils.isEmpty(finalList)){
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+            else {
+                return new ResponseEntity<>(finalList, HttpStatus.OK);
+            }
+        }
+    }
 }

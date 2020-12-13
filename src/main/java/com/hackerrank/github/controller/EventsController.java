@@ -49,4 +49,10 @@ public class EventsController {
     }
 
     //6 point missing
+
+    @GetMapping("/repos/{repoId}/actors/{actorId}")
+    public ResponseEntity<List<Event>> filterByRepoIdAndActorId(
+            @PathVariable Long repoId, @PathVariable Long actorId) {
+        return eventService.findByRepoIdAndActorId(repoId,actorId);
+    }
 }
