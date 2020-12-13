@@ -35,10 +35,10 @@ public class EventsController {
     }
 
     @GetMapping("/repos/{repoId}")
-    public void getEventsByRepoId(@PathVariable String repoId) {
+    public ResponseEntity<List<Event>> getEventsByRepoId(@PathVariable Long repoId) {
         //404
         //200
-        //TODO:
+        return eventService.findByRepoId(repoId);
     }
 
     @GetMapping("/actors/{actorsId}")

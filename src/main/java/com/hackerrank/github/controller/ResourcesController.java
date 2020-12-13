@@ -16,7 +16,6 @@ public class ResourcesController {
     @DeleteMapping
     public ResponseEntity deleteAll() {
         //200 for success
-        //TODO: delete
         return eventService.deleteAll();
     }
 

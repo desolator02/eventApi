@@ -55,4 +55,12 @@ public class EventService {
         return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
+    public ResponseEntity<List<Event>> findByRepoId(Long id) {
+        List<Event> eventList = gitRepoService.findByRepoId(id);
+        if (CollectionUtils.isEmpty(eventList)) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(eventList, HttpStatus.OK);
+    }
+
 }
