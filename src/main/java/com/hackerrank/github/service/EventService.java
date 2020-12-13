@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -39,9 +37,10 @@ public class EventService {
     public ResponseEntity<List<Event>> findAllEvent() {
         List<Event> eventList = gitRepoService.findAll();
         if (CollectionUtils.isEmpty(eventList)) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
-        return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
+        Collections.sort(eventList, (p,q)-> Integer.parseInt ((p.getId() - q.getId()) + ""));
+        return new ResponseEntity<>(eventList, HttpStatus.OK);
     }
 
     public ResponseEntity<Event> deleteAll(){
@@ -78,7 +77,7 @@ public class EventService {
                 return null;
             }).filter(Objects::nonNull).collect(Collectors.toList());
             if(CollectionUtils.isEmpty(finalList)){
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(new ArrayList<Event>(), HttpStatus.NOT_FOUND);
             }
             else {
                 return new ResponseEntity<>(finalList, HttpStatus.OK);
