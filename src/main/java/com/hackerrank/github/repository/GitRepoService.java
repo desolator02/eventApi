@@ -9,4 +9,6 @@ public interface GitRepoService extends CrudRepository<Event,Long> {
 
     List<Event> findAll();
 
+    List<Event> findByActorId(Long id);
+
 }

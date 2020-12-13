@@ -42,4 +42,17 @@ public class EventService {
         return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
     }
 
+    public ResponseEntity<Event> deleteAll(){
+        gitRepoService.deleteAll();
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<Event>> findByActorId(Long id) {
+        List<Event> eventList = gitRepoService.findByActorId(id);
+        if (CollectionUtils.isEmpty(eventList)) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(eventList, HttpStatus.OK);
+    }
+
 }

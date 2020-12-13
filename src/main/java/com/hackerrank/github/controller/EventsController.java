@@ -42,10 +42,10 @@ public class EventsController {
     }
 
     @GetMapping("/actors/{actorsId}")
-    public void getEventsByActorsId(@PathVariable String actorsId) {
-//404
+    public ResponseEntity<List<Event>> getEventsByActorsId(@PathVariable Long actorsId) {
+        //404
         //200
-        //TODO:
+        return eventService.findByActorId(actorsId);
     }
 
     //6 point missing
