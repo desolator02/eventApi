@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Entity
 public class Event {
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
     @ManyToOne(cascade = CascadeType.ALL)

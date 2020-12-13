@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @EnableAutoConfiguration
 public class Actor {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
     @JsonProperty(value = "avatar_url")
