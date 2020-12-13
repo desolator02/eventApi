@@ -1,8 +1,21 @@
 package com.hackerrank.github.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@EnableAutoConfiguration
 public class Actor {
+    @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String login;
+    @JsonProperty(value = "avatar_url")
     private String avatar;
 
     public Actor() {
